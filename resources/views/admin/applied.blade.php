@@ -20,7 +20,7 @@
 
     <div class="showing-jobs d-flex">
         <div>
-            <h4>Jobs</h4>
+            <h4>Applied</h4>
             <p>Showing 10 Jobs</p>
         </div>
         <div class="job-filter ms-auto">

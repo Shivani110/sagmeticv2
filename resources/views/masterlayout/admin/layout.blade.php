@@ -22,9 +22,13 @@
     }
     .sidebar{
         background-color: black;
+        position: fixed;
     }
     .sidebar-items{
         color: white;
+    }
+    .main-content{
+        margin-left: auto
     }
     .icons{
         font-size: 20px;
@@ -39,7 +43,7 @@
         background-color: red;
         
     }
-    .list-group-item:hover{
+    .listitems:hover{
        
         background-color: red;
          border-top-left-radius: 100px;
@@ -55,7 +59,7 @@
 
     <!-- NAVBAR START -->
     
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container-fluid">
                 <div class="col-3">
                 <img id="mainimage" src="{{asset('images/sagmetic.svg')}}" alt="">
@@ -79,22 +83,22 @@
         <div class="sidebar-items  ms-5">
 
             <div class="items mt-4 mb-4">
-            <a href="{{url('/')}}" class="list-group-item text-bg-danger   p-2 " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+            <a href="{{url('/')}}" class="listitems list-group-item text-bg-danger   p-2 " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                <i class="icons ri-home-2-line"></i> Dashboard
             </a>
             </div>
             <div class="items mt-4 mb-4">
-            <a href="{{url('/admin/jobs')}}" class="list-group-item" aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+            <a href="{{url('/admin/jobs')}}" class="listitems list-group-item" aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                <i class="icons ri-suitcase-line"></i> Jobs
             </a>
             </div>
             <div class="items mt-4 mb-4">
-            <a href="{{url('/admin/interview')}}" class="list-group-item  " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+            <a href="{{url('/admin/interview')}}" class="listitems list-group-item  " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                 <i class="icons ri-group-line"></i> Interview
             </a>
             </div> 
             <div class="items mt-4 mb-4">
-                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+                <a href="#" class="listitems list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                     <i class="icons ri-team-line"></i> User Management
                 </a>
             
