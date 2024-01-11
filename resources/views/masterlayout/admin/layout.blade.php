@@ -32,21 +32,29 @@
     .list-group-item{
         padding: 10px;
     }
+    /* a .list-group-item{
+
+    } */
+    .selectedtab{
+        background-color: red;
+        
+    }
     .list-group-item:hover{
        
         background-color: red;
-        border-top-left-radius: 100px;
+         border-top-left-radius: 100px;
         border-bottom-left-radius: 100px;
     }
     #mainimage{
         width: 35%;
         margin-left: 6%;
     }
+    
 </style>
 <body>
 
     <!-- NAVBAR START -->
-    <header>
+    
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <div class="col-3">
@@ -61,7 +69,7 @@
                 </div>
             </div>
         </nav>
-    </header>
+
     <!-- NAVBAR END -->
 
 
@@ -71,31 +79,36 @@
         <div class="sidebar-items  ms-5">
 
             <div class="items mt-4 mb-4">
-            <a href="{{url('/')}}" class="list-group-item list-group-item-action active text-bg-danger p-2" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;" aria-current="true">
+            <a href="{{url('/')}}" class="list-group-item text-bg-danger   p-2 " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                <i class="icons ri-home-2-line"></i> Dashboard
             </a>
             </div>
             <div class="items mt-4 mb-4">
-            <a href="{{url('/admin/jobs')}}" class="list-group-item list-group-item-action" aria-current="true">
+            <a href="{{url('/admin/jobs')}}" class="list-group-item" aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                <i class="icons ri-suitcase-line"></i> Jobs
             </a>
             </div>
             <div class="items mt-4 mb-4">
-            <a href="{{url('/admin/interview')}}" class="list-group-item list-group-item-action " aria-current="true">
+            <a href="{{url('/admin/interview')}}" class="list-group-item  " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                 <i class="icons ri-group-line"></i> Interview
             </a>
             </div> 
             <div class="items mt-4 mb-4">
-                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu">
+                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                     <i class="icons ri-team-line"></i> User Management
                 </a>
             
-                <div class="collapse " id="userManagementSubMenu">
+                <div class="collapse" id="userManagementSubMenu">
                     <div class="list-group" style="font-size:12px">
                         <a href="{{url('/admin/adduser')}}" class="list-group-item">Add HR</a>
                         <a href="{{url('/admin/manageuser')}}" class="list-group-item">Manage Users</a>
                     </div>
                 </div>
+            </div>
+            <div class="items">
+                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+                    <i class="icons ri-team-line"></i> Log Out
+                </a>
             </div>
 
         </div>
@@ -120,5 +133,12 @@
     
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+{{-- <script>
+    $('.list-group-item').on('click',function(e){
+               $(this).addClass('text-bg-primary active');
+
+    })
+</script> --}}
 </body>
 </html>

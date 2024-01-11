@@ -33,29 +33,47 @@
                   <li><a class="dropdown-item" href="#">Another action</a></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
-                <a href="{{url('admin/add-jobs')}}" class="btn btn-sm btn-danger ">Add Job</a>
-              </div>
+            </div>
         </div>
     </div>
     <div class="card">
         <div class="card-body">
     <table class="table card-table" >
         <tr>
-            <th>Jobs</th>
-            <th>Salary</th>
-            <th>Added On</th>
-            <th>Experience</th>
-            <th>Applied</th>
+            <th>Name</th>
+            <th>Applied Date</th>
+            <th>Position</th>
+            <th>Contact</th>
+            <th>Status</th>
             <th></th>
         </tr>
         <tbody>
  
                 <tr>
-                    <td >Wordpress Developer</td>
-                    <td>15k-20k</td>
-                    <td>24/09/2024</td>
-                    <td>0-1yrs</td>
-                    <td><a href="{{url('admin/applied/wordpress')}}" class="btn btn-sm btn-outline-danger">20</a></td>
+                    <td>Rahul Sharma</td>
+                    <td>07/08/2024</td>
+                    <td>Wordpress Developer</td>
+                    <td>eail@gmail.com</td>
+                    <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
+                    <td>
+                        <div class="btn-group ">
+                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ri-more-2-fill" style="" ></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{url('admin/applied/wordpress/applicantid=1')}}">Details</a></li>
+                                <li><a class="dropdown-item" href="#">Remove</a></li>
+                            </ul>
+                    </div>
+                    </td>
+                </tr>
+           
+                 <tr>
+                    <td >Rahul Sharma</td>
+                    <td>07/08/2024</td>
+                    <td>Wordpress Developer</td>
+                    <td>eail@gmail.com</td>
+                    <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
                     <td>
                         <div class="btn-group ">
                             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,56 +81,34 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Applied</a></li>
+                                <li><a class="dropdown-item" href="#">Remove</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+           
+            
+ 
+                <tr>
+                    <td >Rahul Sharma</td>
+                    <td>07/08/2024</td>
+                    <td>Wordpress Developer</td>
+                    <td>eail@gmail.com</td>
+                    <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
+                    <td>
+                        <div class="btn-group ">
+                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ri-more-2-fill" style="" ></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Details</a></li>
                                 <li><a class="dropdown-item" href="#">Remove</a></li>
                             </ul>
                     </div>
                     </td>
                 </tr>
        
-                <tr class="my-2">
-                    <td>PHP Developer</td>
-                    <td>15k-20k</td>
-                    <td>24/09/2024</td>
-                    <td>0-1yrs</td>
-                    <td><a href="#" class="btn btn-sm btn-outline-danger">20</a></td>
-                    <td>
-                        <div class="btn-group ">
-                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill" style="" ></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                            
-                                <li><a class="dropdown-item" href="#">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Applied</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
-
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="my-2 mr-2">
-                    <td>Wordpress Developer</td>
-                    <td>15k-20k</td>
-                    <td>24/09/2024</td>
-                    <td>0-1yrs</td>
-                    <td ><a href="#" class="btn btn-sm btn-outline-danger">20</a></td>
-                    <td>
-                        <div class="btn-group ">
-                             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                             <i class="ri-more-2-fill" style="" ></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                            
-                                <li><a class="dropdown-item" href="#">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Applied</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
-
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-
+                
         </tbody>
     </table>
         </div>

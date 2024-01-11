@@ -20,4 +20,6 @@ Route::view('/admin/interview', 'admin.interview');
 Route::view('/admin/adduser','admin.add-user');
 Route::view('/admin/manageuser','admin.manage-users');
 Route::view('/admin/add-jobs','admin.add-jobs');
+Route::view('/admin/applied/wordpress','admin.applied');
+Route::view('/admin/applied/wordpress/applicantid=1','admin.applicant-details');
 
