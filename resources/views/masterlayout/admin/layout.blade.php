@@ -103,7 +103,19 @@
                 </button>
                 <div class="row collapse navbar-collapse" id="navbarNav">
                     <div class="col-10 p-2"><h5>Dashboard</h5></div>
-                    <div class="col-2 p-2 d-flex justify-content-end align-items-center"><i class="ri-notification-2-line mx-2" style="font-size: 20px;cursor: pointer;" >  </i> <i class="ri-account-circle-fill mx-2" style="font-size: 50px;cursor: pointer;"></i></div>
+                    <div class="col-1 p-2 d-flex justify-content-end align-items-center"><i class="ri-notification-2-line mx-2" style="font-size: 20px;cursor: pointer;"> </i> 
+                        <div class="btn-group ms-auto">
+                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ri-account-circle-fill " style="font-size: 50px;cursor: pointer;"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item">Rahul</li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Applied</a></li>
+                                <li><a class="dropdown-item" href="#">Remove</a></li>
+                            </ul>
+                        </div> 
+                    </div>
                 </div>
             </div>
         </nav>
@@ -163,7 +175,7 @@
     <script src="{{asset('froala/js/plugins/lists.min.js')}}"></script>    
     <script src="{{asset('froala/js/plugins/font_size.min.js')}}"></script>    
     <script src="{{asset('froala/js/plugins/paragraph_format.min.js')}}"></script>    
-    
+
     <!-- MAIN CONTENT -->
     <div class="main-content col-9 mt-4">
             @yield('content')

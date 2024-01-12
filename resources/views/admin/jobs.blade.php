@@ -71,7 +71,7 @@
                                 <li><a class="dropdown-item" href="#">Applied</a></li>
                                 <li><a class="dropdown-item" href="#">Remove</a></li>
                             </ul>
-                    </div>
+                        </div>  
                     </td>
                 </tr>
        
