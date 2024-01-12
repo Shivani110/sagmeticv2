@@ -10,6 +10,9 @@
     {{-- FROALA TEXT EDITOR --}}
     <link href="{{ asset('froala/css/froala_editor.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('froala/css/plugins/table.min.css')}}">
+    {{-- FLATPICKR --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
 </head>
@@ -53,10 +56,41 @@
         width: 35%;
         margin-left: 6%;
     }
+    .manage-items{
+        background: none;
+        color:red;
+        border: none;
+    }
+
     
 </style>
 <body>
-
+    @if(request()->is('/'))
+        <style>
+            #dashboardtab{
+                background-color: red
+            }
+        </style>
+    @elseif(request()->is('admin/jobs'))
+    <style>
+        #jobstab{
+            background-color: red
+        }
+    </style>
+    @elseif(request()->is('admin/interview'))
+    <style>
+        #interviewtab{
+            background-color: red
+        }
+    </style>
+    @elseif(request()->is('admin/adduser') || request()->is('admin/manageuser'))
+    <style>
+        #usertab{
+            background-color: red
+        }
+    </style>
+    
+    @endif
     <!-- NAVBAR START -->
     
         <nav class="navbar navbar-expand-lg sticky-top">
@@ -67,9 +101,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="p-2"><h5>Dashboard</h5></div>
-                    <div class="p-2 ms-auto"><i class="ri-notification-2-line">  </i>   User</div>
+                <div class="row collapse navbar-collapse" id="navbarNav">
+                    <div class="col-10 p-2"><h5>Dashboard</h5></div>
+                    <div class="col-2 p-2 d-flex justify-content-end align-items-center"><i class="ri-notification-2-line mx-2" style="font-size: 20px;cursor: pointer;" >  </i> <i class="ri-account-circle-fill mx-2" style="font-size: 50px;cursor: pointer;"></i></div>
                 </div>
             </div>
         </nav>
@@ -83,66 +117,62 @@
         <div class="sidebar-items  ms-5">
 
             <div class="items mt-4 mb-4">
-            <a href="{{url('/')}}" class="listitems list-group-item text-bg-danger   p-2 " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
-               <i class="icons ri-home-2-line"></i> Dashboard
-            </a>
+               
+                    <a href="{{ url('/') }}" id="dashboardtab" class="listitems list-group-item p-2" aria-current="true" style="border-top-left-radius: 100px; border-bottom-left-radius: 100px;">
+
+                    <i class="icons ri-home-2-line"></i> Dashboard
+                </a>
             </div>
+            
             <div class="items mt-4 mb-4">
-            <a href="{{url('/admin/jobs')}}" class="listitems list-group-item" aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+            <a href="{{url('/admin/jobs')}}" id="jobstab" class="listitems list-group-item" aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                <i class="icons ri-suitcase-line"></i> Jobs
             </a>
             </div>
             <div class="items mt-4 mb-4">
-            <a href="{{url('/admin/interview')}}" class="listitems list-group-item  " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+            <a href="{{url('/admin/interview')}}" id="interviewtab" class="listitems list-group-item  " aria-current="true" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                 <i class="icons ri-group-line"></i> Interview
             </a>
             </div> 
             <div class="items mt-4 mb-4">
-                <a href="#" class="listitems list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+                <a href="#" id="usertab" class="listitems list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                     <i class="icons ri-team-line"></i> User Management
                 </a>
             
                 <div class="collapse" id="userManagementSubMenu">
-                    <div class="list-group" style="font-size:12px">
-                        <a href="{{url('/admin/adduser')}}" class="list-group-item">Add HR</a>
-                        <a href="{{url('/admin/manageuser')}}" class="list-group-item">Manage Users</a>
+                    <div class="list-group" style="font-size:12px;margin-left:30px">
+                        <a href="{{url('/admin/adduser')}}" class="manage-items list-group-item">Add HR</a>
+                        <a href="{{url('/admin/manageuser')}}" class="manage-items list-group-item">Manage Users</a>
                     </div>
                 </div>
             </div>
+            
             <div class="items">
-                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
-                    <i class="icons ri-team-line"></i> Log Out
+                <a href="#" class="list-group-item list-group-item-action" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+                    <i class="ri-logout-box-line"></i>     Log Out
                 </a>
             </div>
-
         </div>
     </div>
     <!-- SIDEBAR END -->
 
-
-    <!-- MAIN CONTENT -->
+    {{-- SCRIPTS --}}
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="{{ asset('froala/js/froala_editor.min.js') }}"></script>
     <script src="{{asset('froala/js/plugins/table.min.js')}}"></script>    
     <script src="{{asset('froala/js/plugins/lists.min.js')}}"></script>    
     <script src="{{asset('froala/js/plugins/font_size.min.js')}}"></script>    
     <script src="{{asset('froala/js/plugins/paragraph_format.min.js')}}"></script>    
+    
+    <!-- MAIN CONTENT -->
     <div class="main-content col-9 mt-4">
             @yield('content')
-        </div>
+    </div>
     <!-- MAIN CONTENT END -->
    
 </div>
 
-    
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-{{-- <script>
-    $('.list-group-item').on('click',function(e){
-               $(this).addClass('text-bg-primary active');
-
-    })
-</script> --}}
 </body>
 </html>

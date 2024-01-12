@@ -8,7 +8,13 @@
     }
 
 </style>
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{url('admin/jobs')}}">Jobs</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add job</li>
+    </ol>
+</nav>
 <form class="row g-3">
     <div class="col-md-12">
         <label for="inputEmail4" class="form-label">Job Title</label>

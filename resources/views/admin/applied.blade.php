@@ -17,7 +17,13 @@
 }
 </style>
 
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{url('admin/jobs')}}">Jobs</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Applied</li>
+    </ol>
+</nav>
     <div class="showing-jobs d-flex">
         <div>
             <h4>Applied</h4>

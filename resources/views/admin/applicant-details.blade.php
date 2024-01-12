@@ -10,6 +10,13 @@
         border-radius: 0px
     }
 </style>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{url('admin/jobs')}}">Jobs</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Details</li>
+    </ol>
+</nav>
 
 <div class="card-container ms-4">
     <h4>Applicant Details</h4>
@@ -119,17 +126,37 @@
     </div>
             <div class="cont mx-2">Message</div>
             <div class="form-floating">
-                
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"> </textarea>
+                <form action="">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"> </textarea>
 
-                <label for="floatingTextarea2">Message....</label>        
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary me-md-2" type="button">Send</button>
-                </div>        
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary me-md-2" type="button">Send</button>
+                    </div>  
+                </form>      
             </div>
-            <div class="butotnass">
-                <button class="btn btn-danger">Invite to Interview</button>
+            <div class="date">
+                <h6>Schedule Interview</h6>
+                <form action="">
+                <input type="text" name="" id="datetime" placeholder="   Select Date and Time">
+                <i class="ri-calendar-fill" style="font-size: 17px;margin-left: -30px;"></i>
+            </div>
+            <div class="but my-3">
+                <button class="btn btn-danger" id="invite">Invite to Interview</button>
+                </form>
                 <button class="btn btn-outline-dark">Reject</button>
             </div>
 </div>
+<script>
+    $('#invite').on('click',function(){
+        $('#datetime').show()
+    })
+</script>
+<script>
+    flatpickr("#datetime", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+    });
+    
+</script>
 @endsection
