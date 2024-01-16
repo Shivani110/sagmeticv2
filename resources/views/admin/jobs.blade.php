@@ -53,70 +53,32 @@
             <th>Applied</th>
             <th></th>
         </tr>
+        <?php $jobs = App\Models\Jobs::all(); ?>
         <tbody>
- 
-                <tr>
-                    <td >Wordpress Developer</td>
-                    <td>15k-20k</td>
-                    <td>24/09/2024</td>
-                    <td>0-1yrs</td>
-                    <td><a href="{{url('admin/applied/wordpress')}}" class="btn btn-sm btn-outline-danger">20</a></td>
-                    <td>
-                        <div class="btn-group ">
-                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill" style="" ></i>
+            @foreach ($jobs as $job)
+                
+            <tr>
+                <td >{{$job->title}}</td>
+                <td>{{$job->salary}}</td>
+                <td>{{$job->created_at}}</td>
+                <td>{{$job->experience}}</td>
+                <td><a href="{{url('admin/applied/wordpress')}}" class="btn btn-sm btn-outline-danger">20</a></td>
+                <td>
+                    <div class="btn-group ">
+                        <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ri-more-2-fill" style="" ></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Details</a></li>
+                                <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/details/'.$job->id)}}">Details</a></li>
                                 <li><a class="dropdown-item" href="#">Applied</a></li>
                                 <li><a class="dropdown-item" href="#">Remove</a></li>
                             </ul>
                         </div>  
                     </td>
                 </tr>
-       
-                <tr class="my-2">
-                    <td>PHP Developer</td>
-                    <td>15k-20k</td>
-                    <td>24/09/2024</td>
-                    <td>0-1yrs</td>
-                    <td><a href="#" class="btn btn-sm btn-outline-danger">20</a></td>
-                    <td>
-                        <div class="btn-group ">
-                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill" style="" ></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                            
-                                <li><a class="dropdown-item" href="#">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Applied</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
-
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="my-2 mr-2">
-                    <td>Wordpress Developer</td>
-                    <td>15k-20k</td>
-                    <td>24/09/2024</td>
-                    <td>0-1yrs</td>
-                    <td ><a href="#" class="btn btn-sm btn-outline-danger">20</a></td>
-                    <td>
-                        <div class="btn-group ">
-                             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                             <i class="ri-more-2-fill" style="" ></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                            
-                                <li><a class="dropdown-item" href="#">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Applied</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
-
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
+                @endforeach
+                
+                
 
         </tbody>
     </table>

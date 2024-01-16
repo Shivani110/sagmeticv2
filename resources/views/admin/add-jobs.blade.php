@@ -15,27 +15,38 @@
       <li class="breadcrumb-item active" aria-current="page">Add job</li>
     </ol>
 </nav>
-<form class="row g-3">
+<form class="row g-3" method="POST" action="{{url('/add-job')}}">
+    @csrf
     <div class="col-md-12">
         <label for="inputEmail4" class="form-label">Job Title</label>
-        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer..">
+        <input type="text" class="form-control" id="inputEmail4" name="title" placeholder="PHP Developer..">
     </div>
     <div class="col-md-12">
         <label for="inputPassword4" class="form-label">Description</label>
-        <textarea id="froala-editor"></textarea>
+        <textarea id="froala-editor" name="description"></textarea>
 
     </div>
     <div class="col-6">
         <label for="inputAddress" class="form-label">Job Type</label>
-        <select id="inputState" class="form-select">
+        <select id="inputState" class="form-select" name="jobtype">
             <option selected>Choose...</option>
-            <option>Part-Time</option>
-            <option>Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
+            <option value="Full-Time">Full-Time</option>
         </select>
     </div>
     <div class="col-6">
+        <label for="inputAddress" class="form-label">Department</label>
+        <select id="inputState" class="form-select" name="department">
+            <option selected>Choose...</option>
+            <option value="IT">IT</option>
+            <option value="Bidding">Bidding</option>
+            <option value="BDE">BDE</option>
+        </select>
+    </div>
+    <div class="col-8">
         <label for="inputAddress2" class="form-label">Skills Required</label>
-        <input type="text" class="form-control" id="inputSkills" placeholder="Tags..."  autocomplete="off">
+        <input type="text" class="form-control" id="inputSkills" placeholder="Tags..."  autocomplete="off" >
+        <input type="text" class="form-control" id="Skills" placeholder="Tags..."  autocomplete="off" name="skills" hidden>
         <ul>
             <li class="row" id="tagslist" >
 
@@ -44,22 +55,22 @@
     </div>
     <div class="col-md-6">
         <label for="inputCity" class="form-label">Salary</label>
-        <select id="inputState" class="form-select">
+        <select id="inputState" class="form-select" name="salary">
             <option selected>Choose...</option>
-            <option>below 10k</option>
-            <option>above 10k</option>
-            <option>10k-20k</option>
-            <option>above 20k</option>
-            <option>No Budget</option>
+            <option value="below 10k">below 10k</option>
+            <option value="above 10k">above 10k</option>
+            <option value="10k-20k">10k-20k</option>
+            <option value="above 20k">above 20k</option>
+            <option value="No Budget">No Budget</option>
         </select>
     </div>
     <div class="col-md-6">
-        <label for="inputState" class="form-label">Required Experirence</label>
-        <select id="inputState" class="form-select">
+        <label for="inputState" class="form-label">Required Experience</label>
+        <select id="inputState" class="form-select" name="experience">
         <option selected>Choose...</option>
-        <option>0-1 years</option>
-        <option>1-2 years</option>
-        <option>more than 2 years</option>
+        <option value="0-1 years">0-1 years</option>
+        <option value="0-2 years">1-2 years</option>
+        <option value="above 2 years">above 2 years</option>
         </select>
     </div>
     <div class="col-12">
@@ -88,6 +99,7 @@
                 $(this).val('')     
             }
         }
+        $('#Skills').val($tags);
      })
 
      $(document).on('click', '.position-absolute', function() {
@@ -95,6 +107,8 @@
         $tags = $tags.filter(function(tag) {
             return tag !== removedTag;
         });
+        $('#Skills').val('');
+        $('#Skills').val($tags);
         $(this).closest('.col-sm-3').remove();
         });
 

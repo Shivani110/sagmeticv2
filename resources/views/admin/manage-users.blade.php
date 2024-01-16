@@ -23,13 +23,17 @@
         <p>Manage User</p>
     </div>
     <div class="row mx-3">
+        <?php $users =  App\Models\User::where('role',2)->get(); ?>
+        @foreach ($users as $user)
+            
+        
         <div class="card col-5 mx-2 p-4 d-flex">
             <div class="row g-0">
                 <div class="col-md-6">
                     <div class="card-title ">
-                    <h4>Varsha Sharma</h4>
+                    <h4>{{$user->name}}</h4>
                     </div>
-                    <h6 class="card-subtitle mb-2 text-muted">abc@gmail.com</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{$user->email}}</h6>
                 </div>
                 <div class="col-md-6">
 
@@ -40,23 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-5 mx-2 p-4 d-flex">
-            <div class="row g-0">
-                <div class="col-md-6">
-                    <div class="card-title ">
-                    <h4>Varsha Sharma</h4>
-                    </div>
-                    <h6 class="card-subtitle mb-2 text-muted">abc@gmail.com</h6>
-                </div>
-                <div class="col-md-6">
-
-                    <div class="card-body ">
-                        <a href="#" class="btn btn-outline-secondary">Edit</a>
-                        <a href="#" class="btn btn-outline-danger">Remove</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
   
     </div>
 </div>

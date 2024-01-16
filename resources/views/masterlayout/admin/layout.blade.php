@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css" integrity="sha512-ZH3KB6wI5ADHaLaez5ynrzxR6lAswuNfhlXdcdhxsvOUghvf02zU1dAsOC6JrBTWbkE1WNDNs5Dcfz493fDMhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <title>Your Page Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css" integrity="sha512-ZH3KB6wI5ADHaLaez5ynrzxR6lAswuNfhlXdcdhxsvOUghvf02zU1dAsOC6JrBTWbkE1WNDNs5Dcfz493fDMhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <title>Sagmetic Admin</title>
     <title>Sagmetic ADMIN</title>
     {{-- FROALA TEXT EDITOR --}}
     <link href="{{ asset('froala/css/froala_editor.min.css') }}" rel="stylesheet">
@@ -13,7 +13,8 @@
     {{-- FLATPICKR --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+    {{-- iziToast --}}
+    <link rel="stylesheet" href="{{asset('iziToast/css/iziToast.min.css')}}">
 
 </head>
 <style>
@@ -109,10 +110,10 @@
                                 <i class="ri-account-circle-fill " style="font-size: 50px;cursor: pointer;"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-item">Rahul</li>
+                                <li class="dropdown-item">{{Auth::user()->name}}</li>
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Applied</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
+                                <li><a class="dropdown-item" href="{{url('/admin/logout')}}">Logout</a></li>
                             </ul>
                         </div> 
                     </div>
@@ -130,7 +131,7 @@
 
             <div class="items mt-4 mb-4">
                
-                    <a href="{{ url('/') }}" id="dashboardtab" class="listitems list-group-item p-2" aria-current="true" style="border-top-left-radius: 100px; border-bottom-left-radius: 100px;">
+                    <a href="{{ url('/admin/home') }}" id="dashboardtab" class="listitems list-group-item p-2" aria-current="true" style="border-top-left-radius: 100px; border-bottom-left-radius: 100px;">
 
                     <i class="icons ri-home-2-line"></i> Dashboard
                 </a>
@@ -146,6 +147,7 @@
                 <i class="icons ri-group-line"></i> Interview
             </a>
             </div> 
+            @if(Auth::user()->role == 1)
             <div class="items mt-4 mb-4">
                 <a href="#" id="usertab" class="listitems list-group-item list-group-item-action" data-bs-toggle="collapse" data-bs-target="#userManagementSubMenu" aria-expanded="false" aria-controls="userManagementSubMenu" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                     <i class="icons ri-team-line"></i> User Management
@@ -158,9 +160,9 @@
                     </div>
                 </div>
             </div>
-            
+            @endif
             <div class="items">
-                <a href="#" class="list-group-item list-group-item-action" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
+                <a href="{{url('/admin/logout')}}" class="list-group-item list-group-item-action" style="border-top-left-radius: 100px;border-bottom-left-radius: 100px;">
                     <i class="ri-logout-box-line"></i>     Log Out
                 </a>
             </div>
@@ -174,7 +176,8 @@
     <script src="{{asset('froala/js/plugins/table.min.js')}}"></script>    
     <script src="{{asset('froala/js/plugins/lists.min.js')}}"></script>    
     <script src="{{asset('froala/js/plugins/font_size.min.js')}}"></script>    
-    <script src="{{asset('froala/js/plugins/paragraph_format.min.js')}}"></script>    
+    <script src="{{asset('froala/js/plugins/paragraph_format.min.js')}}"></script>   
+    <script src="{{asset('iziToast/js/iziToast.min.js')}}" type="text/javascript"></script> 
 
     <!-- MAIN CONTENT -->
     <div class="main-content col-9 mt-4">
@@ -185,6 +188,23 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+@if(session('success'))
+<script>
+        iziToast.success({
+        title: 'Success',
+        position: 'topRight',
+        message: "{{session('success')}}",
+        });
+</script>
+@endif
+@if(session('error'))
+<script>
+        iziToast.error({
+        title: 'Error',
+        position: 'topRight',
+        message: "{{session('error')}}",
+        });
+</script>
+@endif
 </body>
 </html>
