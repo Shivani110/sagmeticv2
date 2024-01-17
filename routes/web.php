@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+////////// WEBSITE FRONTEND ROUTES ////////////
+Route::view('/','frontend.index'); 
+
+
+
+
 ////////////// ADMIN VIEW ROUTES///////////
 Route::group(['middleware'=> 'role:1,2'],function(){
     Route::view('/admin/home','admin.index')->name('admin.index');

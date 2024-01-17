@@ -38,7 +38,9 @@
             <i class="ri-suitcase-line" style="font-size: 40px;"></i>
             <div class="ms-auto">
                 <h5 class="card-title">Jobs</h5>
-                <h2 class="card-subtitle mb-2 ">10</h2>
+                <?php  $jobs = App\Models\Jobs::all();
+                ?>
+                <h2 class="card-subtitle mb-2 ">{{$jobs->count()}}</h2>
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@
 </style>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{url('admin/home')}}">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Jobs</li>
     </ol>
 </nav>
@@ -26,7 +26,8 @@
     <div class="showing-jobs d-flex">
         <div>
             <h4>Jobs</h4>
-            <p>Showing 10 Jobs</p>
+            <?php $jobs = App\Models\Jobs::all(); ?>
+            <p>Showing {{$jobs->count()}} Jobs</p>
         </div>
         <div class="job-filter ms-auto">
             <div class="dropdown">
@@ -53,7 +54,6 @@
                     <th>Applied</th>
                     <th></th>
                 </tr>
-                <?php $jobs = App\Models\Jobs::all(); ?>
                 <tbody>
                     @foreach ($jobs as $job)
                         
@@ -77,9 +77,6 @@
                             </td>
                         </tr>
                         @endforeach
-                        
-                        
-
                 </tbody>
             </table>
         </div>
