@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JobAddedMail;
+use App\Mail\UserAddMail;
 use App\Models\Jobs;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,20 +17,20 @@ class AdminController extends Controller
 
     ////// Login User //////
     function loginUser(Request $request){
-        $user = $request->validate([
-            'useremail'=>'required',
-            'password'=>'required',
-        ]);
-        if($user){
-            if(Auth::attempt(['email'=>$request->useremail,'password'=>$request->password])){
-                return redirect()->route('admin.index')->with('success','Logged In Successfuly!');
-            }
-            else{
-                return redirect()->route('admin.login');
-            }
-        }else{
+    $user = $request->validate([
+        'useremail'=>'required',
+        'password'=>'required',
+    ]);
+    if($user){
+        if(Auth::attempt(['email'=>$request->useremail,'password'=>$request->password])){
+            return redirect()->route('admin.index')->with('success','Logged In Successfuly!');
+        }
+        else{
             return redirect()->route('admin.login');
         }
+    }else{
+        return redirect()->route('admin.login');
+    }
     }
     function logoutUser(){
         Auth::logout();
@@ -59,7 +61,7 @@ class AdminController extends Controller
                 $adduser->password = Hash::make($request->userpassword);
                 $adduser->role = 2;
                 $adduser->save();
-                // Mail::send
+                Mail::to(env('MAIL_USERNAME'))->send(new UserAddMail($adduser));
                 return redirect()->back()->with('success','User added Successsfully!');
             }
             else{
@@ -91,6 +93,7 @@ class AdminController extends Controller
             $add_job->experience = $request->experience;
             $add_job->added_by = Auth::user()->id;
             $add_job->save();
+            Mail::to(env('MAIL_USERNAME'))->send(new JobAddedMail($add_job));
             return redirect()->back()->with('success','Job Added Successfully!');
         }else{
             return redirect()->back()->with('error','An error occured!');
@@ -123,6 +126,13 @@ class AdminController extends Controller
         }else{
             return redirect()->back()->with('error','An error occured!');
 
+        }
+    }
+
+    function removeJob(Request $request){
+        $job = Jobs::where('id',$request->id)->delete();
+        if($job){
+            return $job;
         }
     }
 }

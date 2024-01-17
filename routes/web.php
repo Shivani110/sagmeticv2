@@ -21,6 +21,9 @@ Route::group(['middleware'=> 'role:1,2'],function(){
     Route::view('/admin/jobs','admin.jobs');
     Route::view('/admin/interview', 'admin.interview');
     Route::view('/admin/add-jobs','admin.add-jobs');
+    Route::post('/add-job',[AdminController::class,'addJob']);
+    Route::post('/update-job',[AdminController::class,'updateJob']);
+    Route::get('/removeJob',[AdminController::class,'removeJob']);
     Route::view('/admin/applied/wordpress','admin.applied');
     Route::view('/admin/applied/wordpress/applicantid=1','admin.applicant-details');
     Route::view('/admin/applied/wordpress/applicantid=1/status','admin.applicant-status');  
@@ -35,8 +38,6 @@ Route::get('/admin/logout',[AdminController::class,'logoutUser']);
 /////// ADMIN SPECIAL PERMISSIONS ROUTES /////////// 
 Route::group(['middleware'=>'role:1'],function(){
     Route::post('/add-user',[AdminController::class,'addUser']);
-    Route::post('/add-job',[AdminController::class,'addJob']);
-    Route::post('/update-job',[AdminController::class,'updateJob']);
     Route::view('/admin/adduser','admin.add-user');
     Route::view('/admin/manageuser','admin.manage-users');
 });

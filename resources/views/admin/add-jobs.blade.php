@@ -29,15 +29,13 @@
     <div class="col-6">
         <label for="inputAddress" class="form-label">Job Type</label>
         <select id="inputState" class="form-select" name="jobtype">
-            <option selected>Choose...</option>
-            <option value="Part-Time">Part-Time</option>
             <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
         </select>
     </div>
     <div class="col-6">
         <label for="inputAddress" class="form-label">Department</label>
         <select id="inputState" class="form-select" name="department">
-            <option selected>Choose...</option>
             <option value="IT">IT</option>
             <option value="Bidding">Bidding</option>
             <option value="BDE">BDE</option>
@@ -56,7 +54,6 @@
     <div class="col-md-6">
         <label for="inputCity" class="form-label">Salary</label>
         <select id="inputState" class="form-select" name="salary">
-            <option selected>Choose...</option>
             <option value="below 10k">below 10k</option>
             <option value="above 10k">above 10k</option>
             <option value="10k-20k">10k-20k</option>
@@ -67,7 +64,6 @@
     <div class="col-md-6">
         <label for="inputState" class="form-label">Required Experience</label>
         <select id="inputState" class="form-select" name="experience">
-        <option selected>Choose...</option>
         <option value="0-1 years">0-1 years</option>
         <option value="0-2 years">1-2 years</option>
         <option value="above 2 years">above 2 years</option>

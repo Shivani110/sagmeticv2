@@ -8,7 +8,6 @@
     }
 
 </style>
-<?php  global $editMode;?>
 <div class="row ">
     <div class="col-4">
     <nav aria-label="breadcrumb">
@@ -19,9 +18,7 @@
         </ol>
     </nav>
     </div>
-    @if($editMode == true)
-    @dd('on')
-    @endif
+
     <div class="col-8 d-flex justify-content-end ">
         <button class="btn btn-dark mx-2"  id="editMode"><i class="ri-edit-2-line"></i></button>
     </div>

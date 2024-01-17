@@ -44,44 +44,67 @@
     </div>
     <div class="card">
         <div class="card-body">
-    <table class="table card-table" >
-        <tr>
-            <th>Jobs</th>
-            <th>Salary</th>
-            <th>Added On</th>
-            <th>Experience</th>
-            <th>Applied</th>
-            <th></th>
-        </tr>
-        <?php $jobs = App\Models\Jobs::all(); ?>
-        <tbody>
-            @foreach ($jobs as $job)
-                
-            <tr>
-                <td >{{$job->title}}</td>
-                <td>{{$job->salary}}</td>
-                <td>{{$job->created_at}}</td>
-                <td>{{$job->experience}}</td>
-                <td><a href="{{url('admin/applied/wordpress')}}" class="btn btn-sm btn-outline-danger">20</a></td>
-                <td>
-                    <div class="btn-group ">
-                        <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="ri-more-2-fill" style="" ></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/details/'.$job->id)}}">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Applied</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
-                            </ul>
-                        </div>  
-                    </td>
+            <table class="table card-table" >
+                <tr>
+                    <th>Jobs</th>
+                    <th>Salary</th>
+                    <th>Added On</th>
+                    <th>Experience</th>
+                    <th>Applied</th>
+                    <th></th>
                 </tr>
-                @endforeach
-                
-                
+                <?php $jobs = App\Models\Jobs::all(); ?>
+                <tbody>
+                    @foreach ($jobs as $job)
+                        
+                    <tr>
+                        <td >{{$job->title}}</td>
+                        <td>{{$job->salary}}</td>
+                        <td>{{$job->created_at}}</td>
+                        <td>{{$job->experience}}</td>
+                        <td><a href="{{url('admin/applied/wordpress')}}" class="btn btn-sm btn-outline-danger">20</a></td>
+                        <td>
+                            <div class="btn-group ">
+                                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ri-more-2-fill" style="" ></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/details/'.$job->id)}}">Details</a></li>
+                                        <li><a class="dropdown-item" href="#">Applied</a></li>
+                                        <li><a class="removeJob dropdown-item"  href="#" data-id="{{$job->id}}">Remove</a></li>
+                                    </ul>
+                                </div>  
+                            </td>
+                        </tr>
+                        @endforeach
+                        
+                        
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
         </div>
-        </div>
+    </div>
+{{-- Delete a job posting --}}
+<script>
+    $('.removeJob').on('click',function () {
+        id = $(this).data('id');
+        
+        if(confirm('Do you Want to delete this Job Posting ?')){
+         $(this).closest('tr').remove();
+         $.ajax({
+             type: "get",
+             url: "{{url('/removeJob')}}",
+             data: {
+                 id:id,
+             },
+             success: function (response) {
+                 iziToast.success({
+                    title: 'Job Listing Removed'
+                 })
+             }
+         });
+        }
+       
+      })
+</script>
 @endsection

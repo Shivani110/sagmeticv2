@@ -11,7 +11,7 @@ class AdminViewsController extends Controller
         return view('admin.login');
     }
     function jobDetails($title,$id){
-        $job = Jobs::find($id)->first();
+        $job = Jobs::where('id',$id)->first();
         if($job){
             return view('admin.job-details',compact('job'));
         }

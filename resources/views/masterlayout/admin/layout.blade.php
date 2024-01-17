@@ -66,7 +66,7 @@
     
 </style>
 <body>
-    @if(request()->is('/'))
+    @if(request()->is('admin/home'))
         <style>
             #dashboardtab{
                 background-color: red
