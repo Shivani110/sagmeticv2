@@ -36,6 +36,7 @@ Route::get('/admin/logout',[AdminController::class,'logoutUser']);
 Route::group(['middleware'=>'role:1'],function(){
     Route::post('/add-user',[AdminController::class,'addUser']);
     Route::post('/add-job',[AdminController::class,'addJob']);
+    Route::post('/update-job',[AdminController::class,'updateJob']);
     Route::view('/admin/adduser','admin.add-user');
     Route::view('/admin/manageuser','admin.manage-users');
 });

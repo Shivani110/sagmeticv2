@@ -97,4 +97,32 @@ class AdminController extends Controller
 
         }
     }
+    //////// UPDATE JOB /////////
+    function updateJob(Request $request){
+        $jobdata = $request->validate([
+            'title'=>'required',
+            'description'=>'required',
+            'jobtype'=>'required',
+            'skills'=>'required',
+            'salary'=>'required',
+            'department'=>'required',
+            'experience'=>'required',
+        ]);
+        if($jobdata){
+            $update_job = Jobs::where('id',$request->job_id)->first();
+            $update_job->title = $request->title;
+            $update_job->description = $request->description;
+            $update_job->job_type = $request->jobtype;
+            $update_job->department = $request->department;
+            $update_job->skills = $request->skills;
+            $update_job->salary = $request->salary;
+            $update_job->experience = $request->experience;
+            $update_job->added_by = Auth::user()->id;
+            $update_job->update();
+            return redirect()->back()->with('success','Job Updated Successfully!');
+        }else{
+            return redirect()->back()->with('error','An error occured!');
+
+        }
+    }
 }

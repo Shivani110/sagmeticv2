@@ -23,27 +23,20 @@
     @dd('on')
     @endif
     <div class="col-8 d-flex justify-content-end ">
-        <button class="btn btn-dark mx-2" onclick="editMode()"><i class="ri-edit-2-line"></i></button>
+        <button class="btn btn-dark mx-2"  id="editMode"><i class="ri-edit-2-line"></i></button>
     </div>
 </div>
-<form class="row g-3" method="POST" action="{{url('/add-job')}}">
+<form class="row g-3" method="POST" action="{{url('/update-job')}}">
     @csrf
     <div class="col-md-12">
+        <input type="text" name="job_id" value="{{$job->id}}" hidden>
         <label for="inputEmail4" class="form-label">Job Title</label>
         <input type="text" class="form-control" id="inputEmail4" name="title" placeholder="PHP Developer.." value="{{$job->title}}" disabled>
     </div>
     <div class="col-md-12">
         
         <label for="inputPassword4" class="form-label">Description</label>
-        {{-- <div class="card">
-            <div class="card-body">
-
-                
-            </div>
-        </div> --}}
-        <div class="editor" aria-disabled="#froala-editor">
-        <textarea name="" id="froala-editor"  readonly>{{ $job->description}}</textarea>
-    </div>
+        <textarea id="froala-editor" name="description" >{{$job->description}}</textarea>
     </div>
     <div class="col-6">
         <label for="inputAddress" class="form-label">Job Type</label>
@@ -68,15 +61,19 @@
         <input type="text" id="Skills" name="skills" hidden>
         <ul>
             <li class="row" id="tagslist" >
-                <?php $skills = explode(',',$job->skills) ?>
+                <?php $skills = explode(',',$job->skills);
+                      $encodedSkills = json_encode($skills);
+
+                ?>
                @foreach ($skills as $skill)
                    
-               <div class="col-sm-3 mt-3">
+               <div class="col-sm-3 mt-3" id="skillsList">
                    <button type="button" class="btn btn-sm btn-dark position-relative" >{{$skill}}
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" data-id="">
-                        <i class="ri-close-circle-line"  style="cursor:pointer"> </i>
-                        <span class="visually-hidden">unread messages</span>
-                    </span></button>
+                        <span class="cancelSkill position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark"  data-id="{{$skill}}" hidden >
+                            <i class="ri-close-circle-line"  style="cursor:pointer"> </i>
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </button>
                     </div>
                 @endforeach
             </li>
@@ -102,8 +99,8 @@
         <option value="above 2 years">above 2 years</option>
         </select>
     </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-danger">Save</button>
+    <div class="save-btn col-12">
+        <button type="submit" class="saveChanges btn btn-danger" style="display: none">Save</button>
     </div>
 </form>
 
@@ -113,12 +110,12 @@
         toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', '|', 'formatOL','formatUL','paragraphFormat'],
    
     }) 
-    editor._editor.edit.off();
+   
 
 </script>
 {{-- ########## TAGS FUNCTIONALITY ##########  --}}
 <script> 
- var $tags = []
+    var $tags = <?php echo $encodedSkills; ?>;
      $('#inputSkills').on('keydown',function(e){
         if(e.keyCode === 32){
         
@@ -144,11 +141,33 @@
 
 </script>
 
-{{-- ########## EDIT MODE  ########## --}}
-<script>    
-    function editMode(){
-        $editMode = true;
-    }
+{{-- ########## EDIT MODE Functionality  ########## --}}
+<script>        
+    $('#editMode').on('click', ' .ri-edit-2-line', function() {
+        $('#editMode').html('<i class="ri-close-circle-line"></i>');
+        $('input').removeAttr('disabled');
+        $('select').removeAttr('disabled');
+        $('.saveChanges').show()
+        $('.cancelSkill').removeAttr('hidden');
+        iziToast.info({
+        title: 'Enabled',
+        position: 'topRight',
+        message: "Edit Mode",
+        });
+    })
+    $('#editMode').on('click', ' .ri-close-circle-line', function() {
+        $('#editMode').html('<i class="ri-edit-2-line"></i>');
+        $('input').attr('disabled',true);
+        $('select').attr('disabled',true);
+        $('.cancelSkill').attr('hidden',true);
+        $('.saveChanges').hide()
+        iziToast.info({
+        title: 'Disabled',
+        position: 'topRight',
+        message: "Edit Mode",
+        });
+        });
+
 </script>
 
 @endsection
