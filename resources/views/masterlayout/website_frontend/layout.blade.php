@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{asset('website_frontend/images/favicon.png')}}"> 
+    {{-- REMIX ICONS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css" integrity="sha512-ZH3KB6wI5ADHaLaez5ynrzxR6lAswuNfhlXdcdhxsvOUghvf02zU1dAsOC6JrBTWbkE1WNDNs5Dcfz493fDMhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <title>Sagmetic Admin</title>
+    
+    <!-- Include Dropzone.js -->{{-- DROPZONE  --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css">
+
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -98,6 +104,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       <a class="nav-link" href="#contact">CONTACT</a>
                     </li> 
                     <li class="nav-item">
+                      <a class="nav-link" href="{{url('/careers')}}">CAREERS</a>
+                    </li> 
+                    <li class="nav-item">
                       <a class="nav-link" href="#reviews">REVIEWS</a> 
                     </li>             
                   </ul>
@@ -116,6 +125,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </nav>
         </div>
 </header>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
 
 
 

@@ -52,19 +52,19 @@
                 <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="Rahul Sharma" disabled>
             </div>
             <div class="col-md-3">
-                <label for="inputPassword4" class="form-label">Email</label>
+                <label for="inputPassword4" class="form-label">City</label>
                 <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="rahul@gmail.com" disabled>
             </div>
             <div class="col-3">
-                <label for="inputAddress" class="form-label">Phone</label>
+                <label for="inputAddress" class="form-label">State</label>
                 <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" disabled>
             </div>
             <div class="col-3">
-                <label for="inputAddress" class="form-label">Phone</label>
+                <label for="inputAddress" class="form-label">Zipcode</label>
                 <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" disabled>
             </div>
             <div class="col-8">
-                <label for="inputAddress" class="form-label">Phone</label>
+                <label for="inputAddress" class="form-label">Country</label>
                 <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" disabled>
             </div>
         </form> 
