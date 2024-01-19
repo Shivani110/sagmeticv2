@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminViewsController;
+use App\Http\Controllers\JobApplyController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ Route::view('/','frontend.index');
 Route::view('/careers','frontend.careers'); 
 Route::get('/careers/{title}/{id}',[WebsiteController::class,'jobDetails']); 
 Route::get('/careers/{title}/{id}/application',[WebsiteController::class,'applyJobView']); 
+Route::post('/careers/{title}/{id}/application/apply',[WebsiteController::class,'applyJob']); 
+Route::post('/file-upload',[WebsiteController::class,'uploadFile']); 
+Route::get('/delete-file',[WebsiteController::class,'deleteFile']); 
 
 
 

@@ -75,6 +75,7 @@ class AdminController extends Controller
     function addJob(Request $request){
         $jobdata = $request->validate([
             'title'=>'required',
+            'icon'=>'required|mimes:png,jpg,svg',
             'description'=>'required',
             'jobtype'=>'required',
             'skills'=>'required',
@@ -82,22 +83,28 @@ class AdminController extends Controller
             'department'=>'required',
             'experience'=>'required',
         ]);
-        if($jobdata){
-            $add_job = new Jobs;
-            $add_job->title = $request->title;
-            $add_job->description = $request->description;
-            $add_job->job_type = $request->jobtype;
-            $add_job->department = $request->department;
-            $add_job->skills = $request->skills;
-            $add_job->salary = $request->salary;
-            $add_job->experience = $request->experience;
-            $add_job->added_by = Auth::user()->id;
-            $add_job->save();
-            Mail::to(env('MAIL_USERNAME'))->send(new JobAddedMail($add_job));
-            return redirect()->back()->with('success','Job Added Successfully!');
-        }else{
-            return redirect()->back()->with('error','An error occured!');
-
+        if($request->hasFile('icon')){
+            $uploadedFile = $request->file('icon');
+            $filename = $uploadedFile->getClientOriginalName();
+            $uploadedFile->move(public_path('images/jobicons'), $filename);
+            if($jobdata){
+                $add_job = new Jobs;
+                $add_job->title = $request->title;
+                $add_job->icon_url = $filename;
+                $add_job->description = $request->description;
+                $add_job->job_type = $request->jobtype;
+                $add_job->department = $request->department;
+                $add_job->skills = $request->skills;
+                $add_job->salary = $request->salary;
+                $add_job->experience = $request->experience;
+                $add_job->added_by = Auth::user()->id;
+                $add_job->save();
+                Mail::to(env('MAIL_USERNAME'))->send(new JobAddedMail($add_job));
+                return redirect()->back()->with('success','Job Added Successfully!');
+            }else{
+                return redirect()->back()->with('error','An error occured!');
+    
+            }   
         }
     }
     //////// UPDATE JOB /////////

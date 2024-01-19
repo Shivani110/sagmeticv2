@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <link rel="icon" type="image/x-icon" href="{{asset('website_frontend/images/favicon.png')}}"> 
     {{-- REMIX ICONS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css" integrity="sha512-ZH3KB6wI5ADHaLaez5ynrzxR6lAswuNfhlXdcdhxsvOUghvf02zU1dAsOC6JrBTWbkE1WNDNs5Dcfz493fDMhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <title>Sagmetic Admin</title>
@@ -92,22 +94,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#banner">HOME <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="{{url('/'.'#banner')}}">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#services">OUR SERVICES</a>
+                      <a class="nav-link" href="{{url('/'.'#services')}}">OUR SERVICES</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#about">ABOUT US</a> 
+                      <a class="nav-link" href="{{url('/'.'#about')}}">ABOUT US</a> 
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#contact">CONTACT</a>
+                      <a class="nav-link" href="{{url('/'.'#contact')}}">CONTACT</a>
                     </li> 
                     <li class="nav-item">
                       <a class="nav-link" href="{{url('/careers')}}">CAREERS</a>
                     </li> 
                     <li class="nav-item">
-                      <a class="nav-link" href="#reviews">REVIEWS</a> 
+                      <a class="nav-link" href="{{url('/'.'#reviews')}}">REVIEWS</a> 
                     </li>             
                   </ul>
                  <div class="socialicon">

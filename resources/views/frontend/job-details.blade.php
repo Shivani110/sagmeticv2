@@ -8,9 +8,7 @@
             <div class="card col-7 mx-2">
                 <div class="card-body" >
                     <?php echo $job->description?>
-                </div>
-                <div class="card-subtitle">
-                    Requirement/Skills :<br>
+                    Skills :<br>
                     <?php $skills = explode(',',$job->skills); ?>
                     <div class="card-body">
                         <div class="row">

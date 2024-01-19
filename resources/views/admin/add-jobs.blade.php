@@ -15,11 +15,15 @@
       <li class="breadcrumb-item active" aria-current="page">Add job</li>
     </ol>
 </nav>
-<form class="row g-3" method="POST" action="{{url('/add-job')}}">
+<form class="row g-3" method="POST" action="{{url('/add-job')}}" enctype="multipart/form-data">
     @csrf
     <div class="col-md-12">
         <label for="inputEmail4" class="form-label">Job Title</label>
         <input type="text" class="form-control" id="inputEmail4" name="title" placeholder="PHP Developer..">
+    </div>
+    <div class="col-md-4">
+        <label for="inputEmail4" class="form-label">Job Icon</label>
+        <input type="file" class="form-control" id="inputEmail4" name="icon">
     </div>
     <div class="col-md-12">
         <label for="inputPassword4" class="form-label">Description</label>

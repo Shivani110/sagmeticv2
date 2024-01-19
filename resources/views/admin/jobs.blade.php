@@ -47,6 +47,7 @@
         <div class="card-body">
             <table class="table card-table" >
                 <tr>
+                    
                     <th>Jobs</th>
                     <th>Salary</th>
                     <th>Added On</th>
@@ -58,7 +59,8 @@
                     @foreach ($jobs as $job)
                         
                     <tr>
-                        <td >{{$job->title}}</td>
+                        
+                        <td><img src="{{asset('images/jobicons/'.$job->icon_url)}}" alt="" width="50px"> {{$job->title}}</td>
                         <td>{{$job->salary}}</td>
                         <td>{{$job->created_at}}</td>
                         <td>{{$job->experience}}</td>

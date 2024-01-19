@@ -9,49 +9,20 @@
                 Basic Information
             </div>
             <div class="card-body">
-                <form class="row g-3">
+                <form class="row g-3" action="{{url('/careers/'.$job->title.'/'.$job->id.'/application/apply')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="Rahul Sharma" >
+                        <input type="text" class="form-control" id="inputEmail4" name="name" placeholder="Enter Name"  >
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="rahul@gmail.com" >
+                        <input type="text" class="form-control" id="inputEmail4" name="email" placeholder="Enter Email"  >
                     </div>
                     <div class="col-6">
                         <label for="inputAddress" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" >
+                        <input type="text" class="form-control" id="inputEmail4" name="phone" placeholder="Contact No." >
                     </div>
-                </form> 
-            </div>
-        </div>
-        <div class="card my-4">
-            <div class="card-header">
-                Address
-            </div>
-            <div class="card-body">
-            <form class="row g-3">
-                <div class="col-md-12">
-                    <label for="inputEmail4" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="Rahul Sharma" >
-                </div>
-                <div class="col-md-3">
-                    <label for="inputPassword4" class="form-label">City</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="rahul@gmail.com" >
-                </div>
-                <div class="col-3">
-                    <label for="inputAddress" class="form-label">State</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" >
-                </div>
-                <div class="col-3">
-                    <label for="inputAddress" class="form-label">Zipcode</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" >
-                </div>
-                <div class="col-8">
-                    <label for="inputAddress" class="form-label">Country</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" >
-                </div>
-            
             </div>
         </div>
         <div class="card my-4">
@@ -62,20 +33,25 @@
                 <h6>Education</h6>
                 <div class="row">
                     <div class="col-6">
-                        <label for="inputAddress" class="form-label">Education Level</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" >
+                        <label for="inputAddress" class="form-label">Qualification Degree</label>
+                        <select name="qualification" id="">
+                            <option value="High School">High School</option>
+                            <option value="Graduate">Graduate</option>
+                            <option value="Post Graduate">Post Graduate</option>
+                        </select>
                     </div>
                     <div class="col-6">
                         <label for="inputAddress" class="form-label">University</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" >
+                        <input type="text" class="form-control" id="inputEmail4" name="university" placeholder="Name of University..">
                     </div>
-                    <div class="col-6">
+                    {{-- <div class="col-6">
                         <label for="inputAddress" class="form-label">State</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" >
-                    </div>
+                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." 
+ >
+                    </div> --}}
                    
     
-                    <div class="col-6">
+                    {{-- <div class="col-6">
                         <div class="container">
                             
                             <div class="row ">
@@ -101,48 +77,68 @@
                             </div>
              
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
-     </form> 
+        <input type="text" name="filename" id="filename" hidden>
         <div class="card my-4 col-4">
                Upload Resume
             
             <div class="row">
                 <div class="card-body">
-                    <form action="{{url('/file-upload')}}" class="dropzone" id="myDropzone" data-dz-name="lassi">
-                        @csrf
-                            <div class="dz-message">
-                                <p>Drop files here or click to upload.</p>  
-                            </div>
-                    </form>                
+                    <div id="myDropzone" class="dropzone">
+                        <div class="dz-message">
+                            <p>Drop files here or click to upload.</p>
+                        </div>
+                    </div>              
                 </div>
             </div>
         </div>
 
           
                 <div class="but my-3">
-                    <button class="btn btn-danger" id="invite">Submit</button>
-                    </form>
+                    <button class="btn btn-danger" type="submit" id="invite">Submit</button>
+            </form>
                 </div>
     </div>
 </section>
 <script>
+//  $('form').on('submit', function(){
+    // Dropzone initialization code here
     Dropzone.options.myDropzone = {
-        paramName: "file", // The name that will be used to transfer the file
-        maxFilesize: 5, // MB
-        acceptedFiles: ".pdf",
+        paramName: "file",
+        url: "{{ url('/file-upload') }}",
+        maxFilesize: 5,
+        acceptedFiles: ".pdf,.doc,.docx",
         addRemoveLinks: true,
+        headers: {
+            'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content,
+        },
         init: function() {
             this.on("success", function(file, response) {
-                // Handle the success
+                $('#filename').val(file.name);
             });
+            this.on("removedfile", function(file, response) {
+                $.ajax({
+                    type: "get",
+                    url: "{{url('/delete-file')}}",
+                    data: {
+                        filename:file.name,
+                    },
+                    success: function (response) {
+                        alert(response);
+                    }
+                });
+            });
+
             this.on("error", function(file, errorMessage, xhr) {
-                // Handle the error
+                // Handle error if needed
             });
         }
     };
+// });
+
 </script>
 
 @endsection

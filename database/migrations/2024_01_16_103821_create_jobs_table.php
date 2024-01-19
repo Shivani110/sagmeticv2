@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('icon_url');
             $table->longText('description');
             $table->string('job_type');
             $table->string('department');
