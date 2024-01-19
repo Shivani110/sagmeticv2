@@ -72,7 +72,6 @@ class WebsiteController extends Controller
     }
     
     function SendMail(Request $request){
-       
         $content = $request->validate([
             'name'=>'required',
             'email'=>'required',
@@ -82,7 +81,6 @@ class WebsiteController extends Controller
         ]);
         $sent  = Mail::to(env('MAIL_USERNAME'))->send(new ContactUsMail($content));
         if($sent){
-
             return response()->json('success');
         }
     }
