@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUsMail;
 use App\Models\ApplicantDetails;
 use App\Models\Jobs;
+use App\Models\JobsApplied;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File as File;
+use Illuminate\Support\Facades\Mail;
 
 class WebsiteController extends Controller
 {
-    function jobDetails($title,$id){
-        $job = Jobs::where('id',$id)->first();
+    function jobDetails($title){
+        $job = Jobs::where('title',$title)->first();
         return view('frontend.job-details',compact('job'));
     }
-    function applyJobView($title,$id){
-        $job = Jobs::where('id',$id)->first();
+    function applyJobView($title){
+        $job = Jobs::where('title',$title)->first();
         return view('frontend.job-application',compact('job'));
     }
 
@@ -45,28 +48,43 @@ class WebsiteController extends Controller
         }
     }
 
-    function applyJob(Request $request, $title,$id){
+    function applyJob(Request $request, $title){
         $data = $request->validate([
             'name'=>'required',
             'email'=>'required',
             'phone'=>'required|numeric|min:10',
-            'qualification'=>'required',
-            'university'=>'required',
             'filename'=>'required',
         ]);
         if($data){
-            $applicant = new ApplicantDetails;
-            $applicant->name = $request->name;
-            $applicant->email = $request->email;
-            $applicant->phone = $request->phone;
-            $applicant->qualification = $request->qualification;
-            $applicant->university = $request->university;
-            $applicant->save();
-        
-            
+           
+            $job_applied = new JobsApplied;
+            $job_applied->job_id = $request->job_id;
+            $job_applied->name = $request->name;
+            $job_applied->email = $request->email;
+            $job_applied->phone = $request->phone;
+            $job_applied->attached_file = $request->filename;
+            $job_applied->save();
+            $job = Jobs::where('id',$request->job_id)->first();
+            // Mail::to(env('MAIL_USERNAME'))->send(new );
+            return view('frontend.apply-success',compact('job'));
         };
-        // $job = Jobs::where('id',$id)->first();
-        return view('frontend.job-application',compact('job'));
+       
+    }
+    
+    function SendMail(Request $request){
+       
+        $content = $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'subject'=>'required',
+            'message'=>'required',
+        ]);
+        $sent  = Mail::to(env('MAIL_USERNAME'))->send(new ContactUsMail($content));
+        if($sent){
+
+            return response()->json('success');
+        }
     }
 
 }

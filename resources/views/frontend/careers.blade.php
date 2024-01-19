@@ -51,7 +51,7 @@
                         <a href="#">MOHALI</a>
                         <p>Experience Required: {{$job->experience}}</p>
                         <div class="button">
-                            <a href="{{url('/careers/'.$job->title.'/'.$job->id)}}" class="btn" >Apply Now   <img class="img-fluid" src="{{asset('website_frontend/images/button-polygon')}}.svg" alt=""></a>
+                            <a href="{{url('/careers/'.$job->title)}}" class="btn" >Apply Now   <img class="img-fluid" src="{{asset('website_frontend/images/button-polygon')}}.svg" alt=""></a>
                         </div>
                         </div>
                     </div>

@@ -17,7 +17,6 @@
       <li class="breadcrumb-item active" aria-current="page">Details</li>
     </ol>
 </nav>
-
 <div class="card-container ms-4">
     <h4>Applicant Details</h4>
     <div class="card my-4">
@@ -28,20 +27,20 @@
             <form class="row g-3">
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="Rahul Sharma" disabled>
+                    <input type="text" class="form-control" id="inputEmail4"  value="{{$applicant->name}}" disabled>
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword4" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="rahul@gmail.com" disabled>
+                    <input type="text" class="form-control" id="inputEmail4"  value="{{$applicant->email}}" disabled>
                 </div>
                 <div class="col-6">
                     <label for="inputAddress" class="form-label">Phone</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" disabled>
+                    <input type="text" class="form-control" id="inputEmail4"  value="{{$applicant->phone}}" disabled>
                 </div>
             </form> 
         </div>
     </div>
-    <div class="card my-4">
+    {{-- <div class="card my-4">
         <div class="card-header">
             Address
         </div>
@@ -49,28 +48,28 @@
         <form class="row g-3">
             <div class="col-md-12">
                 <label for="inputEmail4" class="form-label">Address</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="Rahul Sharma" disabled>
+                <input type="text" class="form-control" id="inputEmail4"  value="Rahul Sharma" disabled>
             </div>
             <div class="col-md-3">
                 <label for="inputPassword4" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="rahul@gmail.com" disabled>
+                <input type="text" class="form-control" id="inputEmail4"  value="rahul@gmail.com" disabled>
             </div>
             <div class="col-3">
                 <label for="inputAddress" class="form-label">State</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" disabled>
+                <input type="text" class="form-control" id="inputEmail4"  value="9944826477" disabled>
             </div>
             <div class="col-3">
                 <label for="inputAddress" class="form-label">Zipcode</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" disabled>
+                <input type="text" class="form-control" id="inputEmail4"  value="9944826477" disabled>
             </div>
             <div class="col-8">
                 <label for="inputAddress" class="form-label">Country</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." value="9944826477" disabled>
+                <input type="text" class="form-control" id="inputEmail4"  value="9944826477" disabled>
             </div>
         </form> 
         </div>
-    </div>
-    <div class="card my-4">
+    </div> --}}
+    {{-- <div class="card my-4">
         <div class="card-header">
             Professional Details
         </div>
@@ -79,8 +78,7 @@
                 <div class="col-6">
                     <h6>Education</h6>
                     <ul>
-                        <li>Msc.IT from University of California</li>
-                        <li>Bachelors ffrom this that</li>
+                        <li>{{$applicant->qualification}}</li>
                        
                     </ul>
                 </div>
@@ -114,13 +112,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="card my-4">
         <div class="card-header">
            Attached File
         </div>
         <div class="card-body">
-            <iframe  src="{{ asset('resume/resume1.pdf') }}" width="40%" height="300px"></iframe>
+            <a  href="{{ asset('applicant/uploaded_files/'.$applicant->attached_file) }}" width="40%" height="300px"> Click to View</a>
 
         </div>
     </div>

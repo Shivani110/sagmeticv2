@@ -9,7 +9,7 @@
                 Basic Information
             </div>
             <div class="card-body">
-                <form class="row g-3" action="{{url('/careers/'.$job->title.'/'.$job->id.'/application/apply')}}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="{{url('/careers/'.$job->title.'/application/apply')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Name</label>
@@ -25,63 +25,8 @@
                     </div>
             </div>
         </div>
-        <div class="card my-4">
-            <div class="card-header">
-                Professional Details
-            </div>
-            <div class="card-body">
-                <h6>Education</h6>
-                <div class="row">
-                    <div class="col-6">
-                        <label for="inputAddress" class="form-label">Qualification Degree</label>
-                        <select name="qualification" id="">
-                            <option value="High School">High School</option>
-                            <option value="Graduate">Graduate</option>
-                            <option value="Post Graduate">Post Graduate</option>
-                        </select>
-                    </div>
-                    <div class="col-6">
-                        <label for="inputAddress" class="form-label">University</label>
-                        <input type="text" class="form-control" id="inputEmail4" name="university" placeholder="Name of University..">
-                    </div>
-                    {{-- <div class="col-6">
-                        <label for="inputAddress" class="form-label">State</label>
-                        <input type="text" class="form-control" id="inputEmail4" placeholder="PHP Developer.." 
- >
-                    </div> --}}
-                   
-    
-                    {{-- <div class="col-6">
-                        <div class="container">
-                            
-                            <div class="row ">
-                                <h6>Skills</h6>
-                                <div class="col-md-6">
-                                   
-                                    <ul>
-                                        <li>HTML</li>
-                                        <li>CSS</li>
-                                        <li>JavaScript</li>
-                                        <li>Bootstrap</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    
-                                    <ul>
-                                        <li>PHP</li>
-                                        <li>Laravel</li>
-                                        <li>Python</li>
-                                        <li>MongoDB</li>
-                                    </ul>
-                                </div>
-                            </div>
-             
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
-        </div>
         <input type="text" name="filename" id="filename" hidden>
+        <input type="text" name="job_id" id="job_id" value="{{$job->id}}" hidden>
         <div class="card my-4 col-4">
                Upload Resume
             

@@ -27,7 +27,7 @@
     <div class="showing-jobs d-flex">
         <div>
             <h4>Applied</h4>
-            <p>Showing 10 Jobs</p>
+            <p>Showing 10 applicants</p>
         </div>
         <div class="job-filter ms-auto">
             <div class="dropdown">
@@ -54,67 +54,26 @@
             <th></th>
         </tr>
         <tbody>
- 
+            @foreach ($applicants as $applicant)           
                 <tr>
-                    <td>Rahul Sharma</td>
-                    <td>07/08/2024</td>
-                    <td>Wordpress Developer</td>
-                    <td>eail@gmail.com</td>
-                    <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
+                    <td>{{$applicant->name}}</td>
+                    <td>{{$applicant->created_at->format('Y-m-d')}}</td>
+                    <td>{{$job->title}}</td>
+                    <td>{{$applicant->email}}</td>
+                    <td><a href="#" class="btn btn-sm btn-outline-danger">{{$applicant->current_status}}</a></td>
                     <td>
                         <div class="btn-group ">
                             <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="ri-more-2-fill" style="" ></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{url('admin/applied/wordpress/applicantid=1')}}">Details</a></li>
+                                <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/applied/'.$applicant->name)}}">Details</a></li>
                                 <li><a class="dropdown-item" href="#">Remove</a></li>
                             </ul>
                     </div>
                     </td>
                 </tr>
-           
-                 <tr>
-                    <td >Rahul Sharma</td>
-                    <td>07/08/2024</td>
-                    <td>Wordpress Developer</td>
-                    <td>eail@gmail.com</td>
-                    <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
-                    <td>
-                        <div class="btn-group ">
-                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill" style="" ></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-           
-            
- 
-                <tr>
-                    <td >Rahul Sharma</td>
-                    <td>07/08/2024</td>
-                    <td>Wordpress Developer</td>
-                    <td>eail@gmail.com</td>
-                    <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
-                    <td>
-                        <div class="btn-group ">
-                            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill" style="" ></i>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Details</a></li>
-                                <li><a class="dropdown-item" href="#">Remove</a></li>
-                            </ul>
-                    </div>
-                    </td>
-                </tr>
-       
-                
+            @endforeach         
         </tbody>
     </table>
         </div>

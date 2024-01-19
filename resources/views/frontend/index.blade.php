@@ -186,7 +186,8 @@
         <div class="form-sec">
           <div class="form-wrapper">
             <h3>Get a free quote</h3>
-            <form id="contactform" action="{{asset('website_frontend/controller/mailcontroller.php')}}" method="post">            
+            <form id="contactform" action="#" method="post">  
+              @csrf          
               <div class="floating-label-group">
                 <input type="text" class="form-control" id="name" name="name" autocomplete="off"  required />
                   <label class="floating-label" for="name">Name</label>

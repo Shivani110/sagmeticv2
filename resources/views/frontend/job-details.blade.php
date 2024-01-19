@@ -55,7 +55,7 @@
                     {{$job->created_at->format('Y-m-d')}}
                 </div>
                 <div class="buton">
-                    <a href="{{url('/careers/'.$job->title.'/'.$job->id.'/application')}}" class="btn btn-danger btn-sm p-1 mb-2" style="color: white">Apply Now <i class="ri-send-plane-fill"></i></a>
+                    <a href="{{url('/careers/'.$job->title.'/application')}}" class="btn btn-danger btn-sm p-1 mb-2" style="color: white">Apply Now <i class="ri-send-plane-fill"></i></a>
                 </div>
             </div>
         </div>

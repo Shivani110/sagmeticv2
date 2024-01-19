@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\JobAddedMail;
 use App\Mail\UserAddMail;
 use App\Models\Jobs;
+use App\Models\JobsApplied;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,31 @@ class AdminController extends Controller
     function logoutUser(){
         Auth::logout();
         return redirect()->route('admin.login');
+    }
+
+
+    function loginView(){
+        return view('admin.login');
+    }
+    function jobDetails($title){
+        $job = Jobs::where('title',$title)->first();
+        if($job){
+            return view('admin.job-details',compact('job'));
+        }
+    }
+    function jobApplied($title){
+        $job = Jobs::where('title',$title)->first();
+        $applicants= JobsApplied::where('job_id',$job->id)->get();
+        if($applicants){
+            return view('admin.applied',compact('applicants','job'));
+        }
+    }
+    function applicantDetails($title,$name){
+        $job = Jobs::where('title',$title)->first();
+        $applicant= JobsApplied::where('name',$name)->first();
+        if($applicant){
+            return view('admin.applicant-details',compact('applicant','job'));
+        }
     }
 
     ///// ADD USER FUNCTION /////

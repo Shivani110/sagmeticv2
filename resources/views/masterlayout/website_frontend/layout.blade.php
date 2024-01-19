@@ -156,11 +156,14 @@ $(document).ready(function(){
    
       $.ajax({
         method: 'post',
-         url: '{{asset('website_frontend/controller/mailcontroller.php')}}',
+         url: "{{url('/contact-us-mail')}}",
          data: formdata,
          dataType: 'json',
          contentType: false,
          processData: false,
+         headers:{
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+         },
          success: function(response)
          {
           if(response == 'success'){

@@ -64,15 +64,16 @@
                         <td>{{$job->salary}}</td>
                         <td>{{$job->created_at}}</td>
                         <td>{{$job->experience}}</td>
-                        <td><a href="{{url('admin/applied/wordpress')}}" class="btn btn-sm btn-outline-danger">20</a></td>
+                        <?php $count = App\Models\JobsApplied::where('job_id',$job->id)->count() ?>
+                        <td><a href="{{url('/admin/jobs/'.$job->title.'/applied')}}" class="btn btn-sm btn-outline-danger px-4">{{$count}}</a></td>
                         <td>
                             <div class="btn-group ">
                                 <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="ri-more-2-fill" style="" ></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/details/'.$job->id)}}">Details</a></li>
-                                        <li><a class="dropdown-item" href="#">Applied</a></li>
+                                        <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/details')}}">Details</a></li>
+                                        <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/applied')}}">Applied</a></li>
                                         <li><a class="removeJob dropdown-item"  href="#" data-id="{{$job->id}}">Remove</a></li>
                                     </ul>
                                 </div>  

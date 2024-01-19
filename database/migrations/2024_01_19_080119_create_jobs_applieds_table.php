@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('applicant_details', function (Blueprint $table) {
+        Schema::create('jobs_applieds', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('job_id');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('qualification');
-            $table->string('university');
+            $table->string('current_status')->default('Pending');
+            $table->string('attached_file');
+            $table->timestamps();
+            $table->foreign('job_id')->references('id')->on('jobs');
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('applicant_details');
+        Schema::dropIfExists('jobs_applied');
     }
 };

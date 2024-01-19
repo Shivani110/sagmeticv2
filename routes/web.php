@@ -21,11 +21,12 @@ use Illuminate\Support\Facades\Route;
 ////////// WEBSITE FRONTEND ROUTES ////////////
 Route::view('/','frontend.index'); 
 Route::view('/careers','frontend.careers'); 
-Route::get('/careers/{title}/{id}',[WebsiteController::class,'jobDetails']); 
-Route::get('/careers/{title}/{id}/application',[WebsiteController::class,'applyJobView']); 
-Route::post('/careers/{title}/{id}/application/apply',[WebsiteController::class,'applyJob']); 
+Route::get('/careers/{title}',[WebsiteController::class,'jobDetails']); 
+Route::get('/careers/{title}/application',[WebsiteController::class,'applyJobView']); 
+Route::post('/careers/{title}/application/apply',[WebsiteController::class,'applyJob']); 
 Route::post('/file-upload',[WebsiteController::class,'uploadFile']); 
 Route::get('/delete-file',[WebsiteController::class,'deleteFile']); 
+Route::post('/contact-us-mail',[WebsiteController::class,'SendMail']); 
 
 
 
@@ -40,13 +41,14 @@ Route::group(['middleware'=> 'role:1,2'],function(){
     Route::post('/update-job',[AdminController::class,'updateJob']);
     Route::get('/removeJob',[AdminController::class,'removeJob']);
     Route::view('/admin/applied/wordpress','admin.applied');
-    Route::view('/admin/applied/wordpress/applicantid=1','admin.applicant-details');
+    Route::get('/admin/jobs/{title}/details',[AdminController::class,'jobDetails'])->name('job.details');  
+    Route::get('/admin/jobs/{title}/applied',[AdminController::class,'jobApplied'])->name('job.applied');  
+    Route::get('/admin/jobs/{title}/applied/{name}',[AdminController::class,'applicantDetails']);
     Route::view('/admin/applied/wordpress/applicantid=1/status','admin.applicant-status');  
-    Route::get('/admin/jobs/{title}/details/{id}',[AdminViewsController::class,'jobDetails'])->name('job.details');  
 });
 
 //////////////// ADMIN LOGIN ROUTES ///////////
-Route::get('/admin',[AdminViewsController::class,'loginView'])->name('admin.login');
+Route::get('/admin',[AdminController::class,'loginView'])->name('admin.login');
 Route::post('/admin/login',[AdminController::class,'loginUser']);
 Route::get('/admin/logout',[AdminController::class,'logoutUser']);
 
