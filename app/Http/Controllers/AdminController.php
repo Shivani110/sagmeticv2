@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InviteInterviewMail;
 use App\Mail\JobAddedMail;
 use App\Mail\UserAddMail;
+use App\Models\Interview;
 use App\Models\Jobs;
 use App\Models\JobsApplied;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -167,5 +170,28 @@ class AdminController extends Controller
         if($job){
             return $job;
         }
+    }
+    function inviteInterview(Request $request){
+        $data = $request->validate([
+            'datetime'=>'required',
+        ]);
+        if($data){
+            $msg = $request->message;
+            $datetime = new DateTime($request->datetime);            
+            $applicant = JobsApplied::with('jobs')->where('id',$request->applicant_id)->first();
+            $applicant->current_status = 'Invited';
+            $applicant->save();
+
+            $interview = new Interview;
+            $interview->applicant_id = $request->applicant_id;
+            $interview->scheduled_at = $datetime;
+            $interview->save();
+            $mail = Mail::to($applicant->email)->send(new InviteInterviewMail($applicant,$msg,$interview));
+        
+        if($mail){
+            return redirect()->back()->with('success','Applicant Invited and mail sent!');
+        }
+        }
+
     }
 }

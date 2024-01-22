@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JobsApplied extends Model
+class Interview extends Model
 {
     use HasFactory;
-    function jobs(){
-        return $this->belongsTo(Jobs::class,'job_id','id');
+    function applicant(){
+        return $this->belongsTo(JobsApplied::class,'applicant_id','id');
     }
 }

@@ -124,31 +124,29 @@
     </div>
             <div class="cont mx-2">Message</div>
             <div class="form-floating">
-                <form action="">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"> </textarea>
-
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-primary me-md-2" type="button">Send</button>
-                    </div>  
-                </form>      
+            <form action="{{url('admin/inviteInterview')}}" method="POST">
+                @csrf
+                    <textarea class="form-control" name="message"  placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"> </textarea>  
             </div>
             <div class="date">
                 <h6>Schedule Interview</h6>
-                <form action="">
-                <input type="text" name="" id="datetime" placeholder="   Select Date and Time">
+                <input type="text" name="applicant_id" id="" value="{{$applicant->id}}" hidden>
+
+                <input type="text" name="datetime" id="datetime" placeholder="   Select Date and Time">
                 <i class="ri-calendar-fill" style="font-size: 17px;margin-left: -30px;"></i>
             </div>
-            <div class="but my-3">
+            <div class="container my-3 d-flex">
+                @if($applicant->current_status === 'Invited')
+                <button class="btn btn-danger" id="invite" disabled>Invited</button>
+                @else
                 <button class="btn btn-danger" id="invite">Invite to Interview</button>
-                </form>
+                @endif
+            </form>
+            <form action="{{url('admin/rejectInterview')}}" method="POST" class="mx-1">
                 <button class="btn btn-outline-dark">Reject</button>
+            </form>
             </div>
 </div>
-<script>
-    $('#invite').on('click',function(){
-        $('#datetime').show()
-    })
-</script>
 <script>
     flatpickr("#datetime", {
         enableTime: true,

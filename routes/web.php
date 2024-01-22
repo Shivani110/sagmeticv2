@@ -39,6 +39,8 @@ Route::group(['middleware'=> 'role:1,2'],function(){
     Route::view('/admin/add-jobs','admin.add-jobs');
     Route::post('/add-job',[AdminController::class,'addJob']);
     Route::post('/update-job',[AdminController::class,'updateJob']);
+    Route::post('/admin/inviteInterview',[AdminController::class,'inviteInterview']);
+    Route::post('/admin/rejectInterview',[AdminController::class,'rejectInterview']);
     Route::get('/removeJob',[AdminController::class,'removeJob']);
     Route::view('/admin/applied/wordpress','admin.applied');
     Route::get('/admin/jobs/{title}/details',[AdminController::class,'jobDetails'])->name('job.details');  

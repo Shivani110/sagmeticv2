@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactUsMail;
+use App\Mail\JobAppliedAdminMail;
+use App\Mail\JobAppliedUserMail;
 use App\Models\ApplicantDetails;
 use App\Models\Jobs;
 use App\Models\JobsApplied;
@@ -65,7 +67,8 @@ class WebsiteController extends Controller
             $job_applied->attached_file = $request->filename;
             $job_applied->save();
             $job = Jobs::where('id',$request->job_id)->first();
-            // Mail::to(env('MAIL_USERNAME'))->send(new );
+            // Mail::to(env($request->email))->send(new JobAppliedUserMail);
+            // Mail::to(env('MAIL_USERNAME'))->send(new JobAppliedAdminMail);
             return view('frontend.apply-success',compact('job'));
         };
        
