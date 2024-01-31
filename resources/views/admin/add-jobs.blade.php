@@ -19,7 +19,11 @@
     @csrf
     <div class="col-md-12">
         <label for="inputEmail4" class="form-label">Job Title</label>
-        <input type="text" class="form-control" id="inputEmail4" name="title" placeholder="PHP Developer..">
+        <input type="text" class="form-control" id="jobtitle" name="title" placeholder="PHP Developer..">
+    </div>
+    <div class="col-md-12">
+        <label for="inputEmail4" class="form-label">URL Slug</label>
+        <input type="text" class="form-control" id="url_slug" name="url_slug" placeholder="php-developer..">
     </div>
     <div class="col-md-4">
         <label for="inputEmail4" class="form-label">Job Icon</label>
@@ -59,9 +63,12 @@
         <label for="inputCity" class="form-label">Salary</label>
         <select id="inputState" class="form-select" name="salary">
             <option value="below 10k">below 10k</option>
-            <option value="above 10k">above 10k</option>
+            <option value="10k-15k">10k-15k</option>
             <option value="10k-20k">10k-20k</option>
             <option value="above 20k">above 20k</option>
+            <option value="20k-30k">20k-30k</option>
+            <option value="20k-30k">25k-30k</option>
+            <option value="above 20k">above 30k</option>
             <option value="No Budget">No Budget</option>
         </select>
     </div>
@@ -69,7 +76,7 @@
         <label for="inputState" class="form-label">Required Experience</label>
         <select id="inputState" class="form-select" name="experience">
         <option value="0-1 years">0-1 years</option>
-        <option value="0-2 years">1-2 years</option>
+        <option value="1-2 years">1-2 years</option>
         <option value="above 2 years">above 2 years</option>
         </select>
     </div>
@@ -79,12 +86,14 @@
 </form>
 
 {{-- TEXT EDITOR --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 <script>
-    new FroalaEditor('#froala-editor', {
-        toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', '|', 'formatOL','formatUL','paragraphFormat']
 
-
-    }) 
+    ClassicEditor
+        .create( document.querySelector( '#froala-editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 </script>
 {{-- TAGS FUNCTIONALITY  --}}
 <script> 
@@ -110,8 +119,15 @@
         $('#Skills').val('');
         $('#Skills').val($tags);
         $(this).closest('.col-sm-3').remove();
+        
         });
 
 </script>
-
+<script>
+    $('#jobtitle').on('keyup',function(){
+        value = $(this).val();
+        value = value.replace(/\s+/g, '-').toLowerCase();
+        $('#url_slug').val(value)
+    })
+</script>
 @endsection

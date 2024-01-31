@@ -19,8 +19,10 @@
         <div class="card-body d-flex align-items-center">
             <i class="ri-group-line" style="font-size: 40px;"></i>
             <div class="ms-auto">
+            <?php  $interviews = App\Models\Interview::all();?>
+
                 <h5 class="card-title">Interviews</h5>
-                <h2 class="card-subtitle mb-2 ">80</h2>
+                <h2 class="card-subtitle mb-2 ">{{$interviews->count()}}</h2>
             </div>
         </div>
     </div>
@@ -28,8 +30,9 @@
         <div class="card-body d-flex align-items-center">
             <i class="ri-group-line" style="font-size: 40px;"></i>
             <div class="ms-auto">
+            <?php  $applied = App\Models\JobsApplied::all();?>
                 <h5 class="card-title">Applies</h5>
-                <h2 class="card-subtitle mb-2 ">50</h2>
+                <h2 class="card-subtitle mb-2 ">{{$applied->count()}}</h2>
             </div>
         </div>
     </div>
@@ -38,8 +41,7 @@
             <i class="ri-suitcase-line" style="font-size: 40px;"></i>
             <div class="ms-auto">
                 <h5 class="card-title">Jobs</h5>
-                <?php  $jobs = App\Models\Jobs::all();
-                ?>
+                <?php  $jobs = App\Models\Jobs::all();?>
                 <h2 class="card-subtitle mb-2 ">{{$jobs->count()}}</h2>
             </div>
         </div>

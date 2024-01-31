@@ -15,10 +15,15 @@ class JobAppliedUserMail extends Mailable
 
     /**
      * Create a new message instance.
-     */
-    public function __construct()
+     **/
+
+    public $job;
+
+    public $job_applied;
+    public function __construct($job,$job_applied)
     {
-        //
+        $this->job = $job;
+        $this->job_applied = $job_applied;
     }
 
     /**
@@ -37,7 +42,7 @@ class JobAppliedUserMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.user-email.job_applied',
         );
     }
 

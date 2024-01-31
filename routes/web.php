@@ -21,38 +21,42 @@ use Illuminate\Support\Facades\Route;
 ////////// WEBSITE FRONTEND ROUTES ////////////
 Route::view('/','frontend.index'); 
 Route::view('/careers','frontend.careers'); 
-Route::get('/careers/{title}',[WebsiteController::class,'jobDetails']); 
-Route::get('/careers/{title}/application',[WebsiteController::class,'applyJobView']); 
-Route::post('/careers/{title}/application/apply',[WebsiteController::class,'applyJob']); 
+Route::view('/careers1','frontend.job-details1'); 
+Route::get('/careers/{slug}/apply-success',[WebsiteController::class,'applySuccess']); 
+Route::get('/careers/{slug}',[WebsiteController::class,'jobDetails']); 
+Route::get('/careers/{slug}/application',[WebsiteController::class,'applyJobView']); 
+Route::post('/careers/{slug}/application/apply',[WebsiteController::class,'applyJob']); 
 Route::post('/file-upload',[WebsiteController::class,'uploadFile']); 
 Route::get('/delete-file',[WebsiteController::class,'deleteFile']); 
 Route::post('/contact-us-mail',[WebsiteController::class,'SendMail']); 
 
 
-
-
-////////////// ADMIN VIEW ROUTES///////////
+////////////// ADMIN  ROUTES///////////
 Route::group(['middleware'=> 'role:1,2'],function(){
     Route::view('/admin/home','admin.index')->name('admin.index');
     Route::view('/admin/jobs','admin.jobs');
     Route::view('/admin/interview', 'admin.interview');
     Route::view('/admin/add-jobs','admin.add-jobs');
     Route::post('/add-job',[AdminController::class,'addJob']);
-    Route::post('/update-job',[AdminController::class,'updateJob']);
+    Route::post('/updatejob',[AdminController::class,'updateJob']);
     Route::post('/admin/inviteInterview',[AdminController::class,'inviteInterview']);
     Route::post('/admin/rejectInterview',[AdminController::class,'rejectInterview']);
+    Route::post('/updateInterviewStatus/{id}',[AdminController::class,'updateInterviewStatus']);
     Route::get('/removeJob',[AdminController::class,'removeJob']);
     Route::view('/admin/applied/wordpress','admin.applied');
     Route::get('/admin/jobs/{title}/details',[AdminController::class,'jobDetails'])->name('job.details');  
     Route::get('/admin/jobs/{title}/applied',[AdminController::class,'jobApplied'])->name('job.applied');  
-    Route::get('/admin/jobs/{title}/applied/{name}',[AdminController::class,'applicantDetails']);
-    Route::view('/admin/applied/wordpress/applicantid=1/status','admin.applicant-status');  
+    Route::get('/admin/jobs/{title}/applied/{name}/{id}',[AdminController::class,'applicantDetails']);
+    Route::get('/admin/applied/{title}/{name}/{id}/status',[AdminController::class,'applicantStatus']);  
 });
 
 //////////////// ADMIN LOGIN ROUTES ///////////
 Route::get('/admin',[AdminController::class,'loginView'])->name('admin.login');
 Route::post('/admin/login',[AdminController::class,'loginUser']);
 Route::get('/admin/logout',[AdminController::class,'logoutUser']);
+Route::get('/admin/verify',[AdminController::class,'verifyotp']);
+Route::post('/admin/verified',[AdminController::class,'accountverify']);
+Route::post('/admin/resendotp',[AdminController::class,'resendOtp']);
 
 /////// ADMIN SPECIAL PERMISSIONS ROUTES /////////// 
 Route::group(['middleware'=>'role:1'],function(){
@@ -60,4 +64,5 @@ Route::group(['middleware'=>'role:1'],function(){
     Route::view('/admin/adduser','admin.add-user');
     Route::view('/admin/manageuser','admin.manage-users');
 });
+
 

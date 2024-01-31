@@ -135,6 +135,11 @@
                 <input type="text" name="datetime" id="datetime" placeholder="   Select Date and Time">
                 <i class="ri-calendar-fill" style="font-size: 17px;margin-left: -30px;"></i>
             </div>
+            <span style="color: red;">
+                @error('datetime')
+                    {{$message}}
+                @enderror
+            </span>
             <div class="container my-3 d-flex">
                 @if($applicant->current_status === 'Invited')
                 <button class="btn btn-danger" id="invite" disabled>Invited</button>
@@ -142,9 +147,16 @@
                 <button class="btn btn-danger" id="invite">Invite to Interview</button>
                 @endif
             </form>
+            @if($applicant->current_status === 'Rejected')
+                <button class="btn btn-outline-dark mx-1" disabled>Rejected</button>
+            @else
             <form action="{{url('admin/rejectInterview')}}" method="POST" class="mx-1">
+                @csrf
+            <input type="text" name="applicant_id" id="" value="{{$applicant->id}}" hidden>
+            <input type="text" name="message" id="keyy"  hidden>
                 <button class="btn btn-outline-dark">Reject</button>
             </form>
+            @endif
             </div>
 </div>
 <script>
@@ -153,6 +165,9 @@
         dateFormat: "Y-m-d H:i",
         minDate: "today",
     });
-    
+    $('#floatingTextarea2').on('keyup',function(){
+        text = $(this).val();
+        val = $('#keyy').val(text);
+    })
 </script>
 @endsection

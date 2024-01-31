@@ -23,12 +23,16 @@
         <button class="btn btn-dark mx-2"  id="editMode"><i class="ri-edit-2-line"></i></button>
     </div>
 </div>
-<form class="row g-3" method="POST" action="{{url('/update-job')}}">
+<form class="row g-3" method="POST" action="{{url('/updatejob')}}">
     @csrf
     <div class="col-md-12">
         <input type="text" name="job_id" value="{{$job->id}}" hidden>
         <label for="inputEmail4" class="form-label">Job Title</label>
-        <input type="text" class="form-control" id="inputEmail4" name="title" placeholder="PHP Developer.." value="{{$job->title}}" disabled>
+        <input type="text" class="form-control" id="jobtitle" name="title" placeholder="PHP Developer.." value="{{$job->title}}" disabled>
+    </div>
+    <div class="col-md-12">
+        <label for="inputEmail4" class="form-label">URL-Slug</label>
+        <input type="text" class="form-control" id="url_slug" name="slug" placeholder="PHP Developer.." value="{{$job->url_slug}}" disabled>
     </div>
     <div class="col-md-12">
         
@@ -55,7 +59,7 @@
     <div class="col-8">
         <label for="inputAddress2" class="form-label">Skills Required</label>
         <input type="text" class="form-control" id="inputSkills" placeholder="Tags..."  autocomplete="off" disabled>
-        <input type="text" id="Skills" name="skills" hidden>
+        <input type="text" id="Skills" name="skills" value="{{$job->skills}}" hidden>
         <ul>
             <li class="row" id="tagslist" >
                 <?php $skills = explode(',',$job->skills);
@@ -81,9 +85,12 @@
         <select id="inputState" class="form-select" name="salary" disabled>
             <option selected value="{{$job->salary}}">{{$job->salary}}</option>
             <option value="below 10k">below 10k</option>
-            <option value="above 10k">above 10k</option>
+            <option value="10k-15k">10k-15k</option>
             <option value="10k-20k">10k-20k</option>
             <option value="above 20k">above 20k</option>
+            <option value="20k-30k">20k-30k</option>
+            <option value="20k-30k">25k-30k</option>
+            <option value="above 20k">above 30k</option>
             <option value="No Budget">No Budget</option>
         </select>
     </div>
@@ -92,7 +99,7 @@
         <select id="inputState" class="form-select" name="experience" disabled>
         <option selected value="{{$job->experience}}">{{$job->experience}}</option>
         <option value="0-1 years">0-1 years</option>
-        <option value="0-2 years">1-2 years</option>
+        <option value="1-2 years">1-2 years</option>
         <option value="above 2 years">above 2 years</option>
         </select>
     </div>
@@ -102,12 +109,15 @@
 </form>
 
 {{--########## TEXT EDITOR ##########--}}
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 <script>
-    var editor = new FroalaEditor('#froala-editor', {
-        toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', '|', 'formatOL','formatUL','paragraphFormat'],
-   
-    }) 
-   
+
+    ClassicEditor
+        .create( document.querySelector( '#froala-editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 
 </script>
 {{-- ########## TAGS FUNCTIONALITY ##########  --}}
@@ -165,6 +175,13 @@
         });
         });
 
+</script>
+<script>
+    $('#jobtitle').on('keyup',function(){
+        value = $(this).val();
+        value = value.replace(/\s+/g, '-').toLowerCase();
+        $('#url_slug').val(value)
+    })
 </script>
 
 @endsection

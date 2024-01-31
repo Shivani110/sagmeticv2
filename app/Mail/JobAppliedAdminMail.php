@@ -16,9 +16,12 @@ class JobAppliedAdminMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $job;
+    public $job_applied;
+    public function __construct($job,$job_applied)
     {
-        //
+        $this->job = $job;
+        $this->job_applied = $job_applied;
     }
 
     /**
@@ -37,7 +40,7 @@ class JobAppliedAdminMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.admin_emails.job_applied',
         );
     }
 

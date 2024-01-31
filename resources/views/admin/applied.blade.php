@@ -67,7 +67,7 @@
                                 <i class="ri-more-2-fill" style="" ></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/applied/'.$applicant->name)}}">Details</a></li>
+                                <li><a class="dropdown-item" href="{{url('/admin/jobs/'.$job->title.'/applied/'.$applicant->name.'/'.$applicant->id)}}">Details</a></li>
                                 <li><a class="dropdown-item" href="#">Remove</a></li>
                             </ul>
                     </div>

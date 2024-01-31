@@ -45,27 +45,29 @@
             </div>
         </div>
     </div>
-    {{-- <div class="card">
-        <div class="card-body"> --}}
-            <div class="container ">
-                <div class="card d-flex flex-row" style="font-weight: bolder">
-                        <div class="mx-3" style="margin:10px">Name</div>
-                        <div  style="margin:10px;margin-left: 17%;margin-right: 17%;">Position</div>
-                        <div  style="margin:10px">Interview Date</div>
-                        <div  style="margin:10px;margin-left: 7%;margin-right: 8%;">Time</div>
-                        <div  style="margin:10px">Status</div>
-                        <div  style="margin:10px"></div>
-                </div>
-                <div class="card">
-                    <table class="table table-borderless">
-                        <div class="card-body">
-                     
+              <div class="card">
+                    <div class="card-body">
+                        <table class="table card-table" >
                             <tr>
-                            <td>Rahul Sharma</td>
-                            <td>Wordpress Developer</td>
-                            <td>07/08/2024</td>
-                            <td>9:00AM</td>
-                            <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
+                                
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Interview Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            <tbody>
+                     <?php $interviews = App\Models\Interview::with('applicant')->get(); ?>
+                     @foreach ($interviews as $interview)
+                         <?php $job = App\Models\Jobs::where('id',$interview->applicant->job_id)->first();  ?>
+                            
+                            <tr>
+                            <td>{{$interview->applicant->name}}</td>
+                            <td>{{$job->title}}</td>
+                            <td>{{\Carbon\Carbon::parse($interview->scheduled_at)->format('Y-m-d')}}</td>
+                            <td>{{\Carbon\Carbon::parse($interview->scheduled_at)->format('h:i a')}}</td>
+                            <td><a href="{{url('admin/applied/'.$job->title.'/'.$interview->applicant->name.'/'.$interview->applicant_id.'/status')}}" class="btn btn-sm btn-outline-danger">{{$interview->interview_status}}</a></td>
                             <td>
                                 <div class="btn-group ">
                                     <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,66 +75,15 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{url('admin/applied/wordpress/applicantid=1')}}">Details</a></li>
-                                        <li><a class="dropdown-item" href="{{url('admin/applied/wordpress/applicantid=1/status')}}">Status</a></li>
+                                        <li><a class="dropdown-item" href="{{url('admin/applied/'.$job->title.'/'.$interview->applicant->name.'/'.$interview->applicant_id.'/status')}}">Status</a></li>
                                         <li><a class="dropdown-item" href="#">Remove</a></li>
                                     </ul>
                                 </div>
                             </td>
-                            </tr>
-                        </div>
-                    </table>
-                </div>
-            
-            <div class="card">
-                <table class="table table-borderless">
-                    <div class="card-body">
-                        <tr>
-                            <td>Rahul Sharma</td>
-                            <td>Wordpress Developer</td>
-                            <td>07/08/2024</td>
-                            <td>9:00AM</td>
-                            <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
-                            <td>
-                                <div class="btn-group ">
-                                    <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ri-more-2-fill" style="" ></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{url('admin/applied/wordpress/applicantid=1')}}">Details</a></li>
-                                        <li><a class="dropdown-item" href="#">Status</a></li>
-                                        <li><a class="dropdown-item" href="#">Remove</a></li>
-                                    </ul>
-                            </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            
-            <div class="card">
-                <table class="table table-borderless">
-                    <div class="card-body">
-                        <tr>
-                            <td>Rahul Sharma</td>
-                            <td>Wordpress Developer</td>
-                            <td>07/08/2024</td>
-                            <td>9:00AM</td>
-                            <td><a href="#" class="btn btn-sm btn-outline-danger">Pending</a></td>
-                            <td>
-                                <div class="btn-group ">
-                                    <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ri-more-2-fill" style="" ></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{url('admin/applied/wordpress/applicantid=1')}}">Details</a></li>
-                                        <li><a class="dropdown-item" href="#">Status</a></li>
-                                        <li><a class="dropdown-item" href="#">Remove</a></li>
-                                    </ul>
-                            </div>
-                            </td>
-                        </tr>
-                    </div>
-                    </table>
-                </div>
-            </div>
-        </div>        
+                            </tr> 
+                            </tbody>
+                            @endforeach
+                       </table>
+                     </div>
+                </div>    
 @endsection

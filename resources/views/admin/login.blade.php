@@ -51,9 +51,9 @@
 .login-container input[type="submit"]:hover {
     background-color: #ff0101;
 }
+
 </style>
 <body>
-
     <div class="login-container">
         <h1>Admin Login</h1>
         <form action="{{url('admin/login')}}" method="post">
@@ -64,6 +64,15 @@
             <input type="password" id="password" name="password" required>
             <input type="submit" value="Login">
         </form>
+        @if($message = Session::get('success'))
+            <div class="success">
+                <p>{{ $message }}</p>
+            </div>
+        @elseif($message = Session::get('error'))
+            <div class="error">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
     </div>
 </body>
 </html>
