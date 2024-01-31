@@ -92,7 +92,7 @@
     <script>
         // $(document).ready(function(){
         
-            var timer = 60;
+            var timer = 600;
             function countdown(){
                 timer-- ;
 
